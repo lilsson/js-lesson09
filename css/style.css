@@ -1,0 +1,24 @@
+.slide{
+    display: block;
+    width: 100%;
+}
+
+img {
+    width: 100%;
+}
+.slider-wraper {
+    position: relative;
+}
+
+.arrow{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: black;
+    font-size: 35px;
+}
