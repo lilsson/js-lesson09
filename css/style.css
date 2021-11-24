@@ -22,3 +22,18 @@ img {
     background-color: black;
     font-size: 35px;
 }
+.arrow.arrow-right{
+    right: 30px;
+}
+.arrow.arrow-left{
+    left: 30px;
+}
+
+
+.title{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    font-size: 40px;
+    color: blue;
+}
