@@ -95,3 +95,96 @@
 //     }
 
 //     renderPage();
+
+// slider
+
+let data = [
+    {
+        id: 1,
+        imageUrl:'https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg',
+        title: 'title 1',
+        url: 'https://google.com'
+    },
+    {
+        id: 2,
+        imageUrl:'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+        title: 'title 2',
+        url: 'https://google.com'
+    },
+    {
+        id: 3,
+        imageUrl:'https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&w=1000&q=80',
+        title: 'title 3',
+        url: 'https://google.com'
+    },
+    {
+        id: 4,
+        imageUrl:'https://imgv3.fotor.com/images/homepage-feature-card/Fotor-image-cropper.jpg',
+        title: 'title 4',
+        url: 'https://google.com'
+    }
+]
+
+let arrowLeft = document.getElementById('arrow-left');
+let sliderContent = document.getElementById('slider-content');
+let arrowRight = document.getElementById('arrow-right');
+let sliderIndex = 0;
+
+function createAtag(item) {
+    let tag = document.createElement('a');
+    tag.setAttribute('href', item.url);
+    tag.setAttribute('class', 'slide');
+
+    return tag;
+}
+
+function createH2tag(item) {
+    let tagTitle = document.createElement('h2');
+    tagTitle.setAttribute('class', 'title');
+    tagTitle.append(item.title);
+
+    return tagTitle;
+}
+
+function createImgtag(item) {
+    let tagImage = document.createElement('img');
+    tagImage.setAttribute('src', item.imageUrl);
+    tagImage.setAttribute('alt', item.title);
+    
+
+    return tagImage;
+}
+
+function setSlide() {
+    sliderContent.innerHTML = ' ';
+    let slideItem = createAtag(data[sliderIndex]);
+    let h2tag = createH2tag(data[sliderIndex]);
+    let imgtag = createImgtag(data[sliderIndex]);
+
+    slideItem.appendChild(h2tag);
+    slideItem.appendChild(imgtag);
+
+
+    sliderContent.appendChild(slideItem);
+
+    console.log(slideItem);
+    
+}
+
+arrowLeft.addEventListener('click', function() {
+    if( sliderIndex <= 0) {
+        return;
+    }
+    sliderIndex--;
+    setSlide();
+});
+
+arrowRight.addEventListener('click', function() {
+    if( sliderIndex >= data.length -1) {
+        return;
+    }
+    sliderIndex++;
+    setSlide();
+});
+
+setSlide();
