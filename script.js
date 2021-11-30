@@ -129,6 +129,7 @@ let arrowLeft = document.getElementById('arrow-left');
 let sliderContent = document.getElementById('slider-content');
 let arrowRight = document.getElementById('arrow-right');
 let sliderIndex = 0;
+let dotsList = document.getElementsByClassName('dot');
 
 function createAtag(item) {
     let tag = document.createElement('a');
@@ -155,36 +156,75 @@ function createImgtag(item) {
     return tagImage;
 }
 
+function createDots(item) {
+    let dots = document.createElement('div');
+    dots.setAttribute('class', 'dots');
+
+    data.forEach( (element) => { 
+        let dot = document.createElement('div');
+        dot.setAttribute('class', 'dot');
+        dot.setAttribute('data-id', element.id -1);
+
+        dot.onclick = function(event) {
+            let id = event.target.getAttribute('data-id');
+            sliderIndex = id; 
+            setSlide();
+        }
+
+        dots.appendChild(dot);
+
+    });
+
+    console.log(dots);
+    return dots;
+}
+
 function setSlide() {
     sliderContent.innerHTML = ' ';
     let slideItem = createAtag(data[sliderIndex]);
     let h2tag = createH2tag(data[sliderIndex]);
     let imgtag = createImgtag(data[sliderIndex]);
+    let dots = createDots();
 
     slideItem.appendChild(h2tag);
     slideItem.appendChild(imgtag);
 
 
     sliderContent.appendChild(slideItem);
+    sliderContent.appendChild(dots);
+    currentDotActive();
 
-    console.log(slideItem);
-    
+}
+function currentDotActive() {
+    dotsList[sliderIndex].classList.add('active');
 }
 
-arrowLeft.addEventListener('click', function() {
+function arrowLeftClick() {
     if( sliderIndex <= 0) {
+        sliderIndex = data.length -1;
+        setSlide();
         return;
     }
     sliderIndex--;
     setSlide();
-});
+}
 
-arrowRight.addEventListener('click', function() {
+function arrowRightClick() {
     if( sliderIndex >= data.length -1) {
+        sliderIndex = 0;
+        setSlide();
         return;
     }
     sliderIndex++;
     setSlide();
-});
+}
+
+arrowLeft.addEventListener('click', arrowLeftClick);
+
+arrowRight.addEventListener('click', arrowRightClick);
+
+// setInterval( () => {
+//     arrowRightClick();
+// }, 3000);
 
 setSlide();
